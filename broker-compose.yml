@@ -1,0 +1,20 @@
+services:
+  activemq:
+    image: vromero/activemq-artemis:latest
+    container_name: activemq
+    restart: unless-stopped
+    ports:
+      - "61616:61616"   # Port JMS
+      - "8161:8161"     # Console web
+    environment:
+      - ARTEMIS_USERNAME=admin
+      - ARTEMIS_PASSWORD=admin
+      - ARTEMIS_MIN_MEMORY=512M
+      - ARTEMIS_MAX_MEMORY=2048M
+    volumes:
+      - activemq-data:/var/lib/artemis/data
+      - activemq-logs:/var/lib/artemis/log
+
+volumes:
+  activemq-data:
+  activemq-logs:
